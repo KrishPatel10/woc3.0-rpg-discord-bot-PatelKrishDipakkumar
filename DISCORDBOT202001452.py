@@ -17,13 +17,13 @@ except:
 client = commands.Bot(command_prefix='.')
 
 
-@client.event
+@client.event #for see at your end bot is connected
 async def on_ready():
     print("Bot is ready")
 
 
 @client.command()
-async def start(ctx):
+async def start(ctx): #to enter the game and update data of player
 
     await ctx.send(f"{ctx.author.name} What you wanna be??\n")
     await ctx.send("ARCHER OR MAGE OR WARRIOR")
@@ -50,7 +50,7 @@ async def start(ctx):
 
 
 @client.command()
-async def archer(ctx):
+async def archer(ctx): #class archer
     await ctx.send("Do you wanna attack or evade??")
 
     pid = ctx.author.name
@@ -68,7 +68,7 @@ async def archer(ctx):
 
 
 @client.command()
-async def warrior(ctx):
+async def warrior(ctx): #class warrior
     await ctx.send("Do you wanna attack or evade??")
 
     pid = ctx.author.name
@@ -86,7 +86,7 @@ async def warrior(ctx):
 
 
 @client.command()
-async def mage(ctx):
+async def mage(ctx):#class mage
     await ctx.send("Do you wanna attack or evade??")
 
     pid = ctx.author.name
@@ -104,7 +104,7 @@ async def mage(ctx):
 
 
 @client.command()
-async def attack(ctx):
+async def attack(ctx): # process of attack
 
     hpe = random.randrange(0, 101)
     hpp = random.randrange(0, 101)
@@ -148,7 +148,7 @@ async def attack(ctx):
 
 
 @client.command()
-async def evade(ctx):
+async def evade(ctx): #process of evade
     hpip = 100
     pid = ctx.author.name
     hpe = random.randrange(0, 101)
@@ -192,7 +192,7 @@ async def evade(ctx):
         df.to_csv("statis.csv", index=False)
 
 
-@client.command()
+@client.command() # givig a data to user
 async def stat(ctx):
     pid = ctx.author.name
     with open('statis.csv', 'r', newline='') as f:
@@ -215,4 +215,4 @@ async def stat(ctx):
         await ctx.send("PLAYER NAME IS: "+pid+"\nPLAYER HP IS: "+hpmy+"\nOPPONENT HP :"+hpev+"\nCLASS IS: "+clas+"\n LEVEL IS: "+level)
 
 
-client.run('ODAyMTQwMTQzNDA1MzY3MzI3.YAq5OQ.SBMJFTu0_etXDQrsmnXYczAwS9w')
+client.run('ODAyMTQwMTQzNDA1MzY3MzI3.YAq5OQ.SBMJFTu0_etXDQrsmnXYczAwS9w') #channel link
