@@ -192,7 +192,7 @@ async def evade(ctx): #process of evade
         df.to_csv("statis.csv", index=False)
 
 
-@client.command() # givig a data to user
+@client.command() # giving a data to user
 async def stat(ctx):
     pid = ctx.author.name
     with open('statis.csv', 'r', newline='') as f:
