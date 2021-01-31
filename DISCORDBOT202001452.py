@@ -16,17 +16,24 @@ except:
 
 client = commands.Bot(command_prefix='.')
 
+@client.event
+async def on_member_join(member):
+    await member.create_dm()
+    await member.dm_channel.send(
+        f'Hi {member.name}, welcome to my Discord server!'
+    )
 
-@client.event #for see at your end bot is connected
+
+@client.event
 async def on_ready():
     print("Bot is ready")
 
 
 @client.command()
-async def start(ctx): #to enter the game and update data of player
+async def start(ctx):
 
     await ctx.send(f"{ctx.author.name} What you wanna be??\n")
-    await ctx.send("ARCHER OR MAGE OR WARRIOR")
+    await ctx.send("🏹ARCHER🏹 \n 🧙MAGE🧙 \n  ⚔️WARRIOR⚔️")
     pid = ctx.author.name
     with open('statis.csv', 'r', newline='') as f:
         csvf = csv.reader(f)
@@ -50,8 +57,8 @@ async def start(ctx): #to enter the game and update data of player
 
 
 @client.command()
-async def archer(ctx): #class archer
-    await ctx.send("Do you wanna attack or evade??")
+async def archer(ctx):
+    await ctx.send("Do you wanna \n⚔️attack  ⚔️\n 🛡️  evade 🛡️")
 
     pid = ctx.author.name
 
@@ -68,8 +75,8 @@ async def archer(ctx): #class archer
 
 
 @client.command()
-async def warrior(ctx): #class warrior
-    await ctx.send("Do you wanna attack or evade??")
+async def warrior(ctx):
+    await ctx.send("Do you wanna \n⚔️attack  ⚔️\n 🛡️  evade 🛡️")
 
     pid = ctx.author.name
 
@@ -86,8 +93,8 @@ async def warrior(ctx): #class warrior
 
 
 @client.command()
-async def mage(ctx):#class mage
-    await ctx.send("Do you wanna attack or evade??")
+async def mage(ctx):
+    await ctx.send("Do you wanna \n⚔️attack  ⚔️\n 🛡️  evade 🛡️")
 
     pid = ctx.author.name
 
@@ -104,7 +111,7 @@ async def mage(ctx):#class mage
 
 
 @client.command()
-async def attack(ctx): # process of attack
+async def attack(ctx):
 
     hpe = random.randrange(0, 101)
     hpp = random.randrange(0, 101)
@@ -123,15 +130,20 @@ async def attack(ctx): # process of attack
     hpev = hpie-hpe
     hppl = hpip-hpp
 
-    if hpev < 0:
+    if (hpev < 0 and hppl >0):
         await ctx.send("YOU WON!!\n Iam resetting opponent's data!!!\nHURRAY\n LEVEL UP!!!")
         hpev = 100
         level = level + 1
 
-    if hppl < 0:
+    if (hppl < 0 and hpev>0):
         await ctx.send("YOU LOST!!!\n I am resetting your data!!!\n I am decreasing your level!!!")
         hppl = 100
         level = level-1
+
+    if (hppl < 0 and hpev <0):
+        await ctx.send("YOU BOTH DIED!!!\n FIGHT BACK\nI AM REVIVING BOTH OF YOU!!!")
+        hppl = 100
+        hpev = 100
 
     with open('statis.csv', 'r', newline='') as remov:
         remover = csv.reader(remov)
@@ -148,7 +160,7 @@ async def attack(ctx): # process of attack
 
 
 @client.command()
-async def evade(ctx): #process of evade
+async def evade(ctx):
     hpip = 100
     pid = ctx.author.name
     hpe = random.randrange(0, 101)
@@ -168,15 +180,20 @@ async def evade(ctx): #process of evade
     hppl = hpip - hpp
     hpev = hpie - hpe
 
-    if hpev < 0:
+    if (hpev < 0 and hppl > 0):
         await ctx.send("YOU WON!!\n I am resetting opponent's data!!!\n HURRAY\nLEVEL UP!!!!")
         hpev = 100
         level = level + 1
 
-    if hppl < 0:
+    if (hppl < 0 and hpev >0):
         await ctx.send("YOU LOST!!!\n I am resetting your data!!!\nI am decreasing your level!!!")
         hppl = 100
         level = level-1
+
+    if (hppl < 0 and hpev < 0):
+        await ctx.send("YOU BOTH DIED!!!\n FIGHT BACK\nI AM REVIVING BOTH OF YOU!!!")
+        hppl =100
+        hpev =100
 
     with open('statis.csv', 'r', newline='') as remov:
         remover = csv.reader(remov)
@@ -192,7 +209,7 @@ async def evade(ctx): #process of evade
         df.to_csv("statis.csv", index=False)
 
 
-@client.command() # givig a data to user
+@client.command()
 async def stat(ctx):
     pid = ctx.author.name
     with open('statis.csv', 'r', newline='') as f:
@@ -205,6 +222,15 @@ async def stat(ctx):
                 clas = row[3]
                 level = str(row[4])
 
+    if clas == 'Archer':
+        clas = "🏹ARCHER🏹"
+
+    if clas == "Warrior":
+        clas = " ⚔️WARRIOR ⚔️"
+
+    if clas == "Mage":
+        clas = "🧙MAGE🧙"
+
     if int(hpev) < 0:
         hpev = '0'
 
@@ -215,4 +241,17 @@ async def stat(ctx):
         await ctx.send("PLAYER NAME IS: "+pid+"\nPLAYER HP IS: "+hpmy+"\nOPPONENT HP :"+hpev+"\nCLASS IS: "+clas+"\n LEVEL IS: "+level)
 
 
-client.run('ODAyMTQwMTQzNDA1MzY3MzI3.YAq5OQ.SBMJFTu0_etXDQrsmnXYczAwS9w') #channel link
+@client.command()
+async def rule(ctx):
+    await ctx.author.send("Command List:\n"
+"\'.\' is necessary as prefix of every commands!\n"
+".start - 🏁to enter your name in registry and further playing!\n"
+'.archer - 🏹to change your class to archer\n'
+'.warrior - ⚔to change your class to warrior\n'
+'.mage - 🧙to change your class to mage\n'
+'.attack - ⚔️to attack on enemies\n'
+'.evade - 🛡️to evade the enemies\n'
+".stat - 🏁to see your current progress, and current data")
+
+
+client.run('ODAyMTQwMTQzNDA1MzY3MzI3.YAq5OQ.W9xqeBXZeBTeFY1Fbv7QtJAHQTE')
