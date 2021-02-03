@@ -7,3 +7,6 @@ Command List:
 .attack - to attack on enemies
 .evade - to evade the enemies
 .stat - to see your current progress, and current data
+
+
+Video link:  https://drive.google.com/drive/folders/1Ae98_x6xaTGdiev1BCdjsNi9kGoYExyF
