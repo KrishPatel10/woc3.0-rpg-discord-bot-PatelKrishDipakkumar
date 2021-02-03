@@ -9,4 +9,4 @@ Command List:
 .stat - to see your current progress, and current data
 
 
-Video link:  https://drive.google.com/drive/folders/1Ae98_x6xaTGdiev1BCdjsNi9kGoYExyF
+Video link:  https://drive.google.com/file/d/1hYmrOf-l1q9dMfAmMCyWwIBv-uv-6ADE/view?usp=sharing
