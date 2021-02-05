@@ -254,4 +254,4 @@ async def rule(ctx):
 ".stat - 🏁to see your current progress, and current data")
 
 
-client.run('ODAyMTQwMTQzNDA1MzY3MzI3.YAq5OQ.W9xqeBXZeBTeFY1Fbv7QtJAHQTE')
+client.run(TOKEN)
